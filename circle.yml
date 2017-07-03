@@ -1,3 +1,13 @@
+machine:
+  environment:
+    ANDROID_HOME: /usr/local/android-sdk-linux
+    GRADLE_OPTS: -Xmx512m
+
+dependencies:
+  post:
+    - echo y | android update sdk --no-ui --all
+
 test:
   override:
     - ./gradlew assembleDebug
+    - cp -r circle-dummy-android/build/outputs $CIRCLE_ARTIFACTS
